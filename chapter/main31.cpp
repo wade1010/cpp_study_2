@@ -8,7 +8,7 @@ public:
         m_Name.clear();
         m_Age = 0;
         memset(m_Hobby, 0, sizeof(m_Hobby));
-        cout << "调用了构造函数Person() " << endl;
+//        cout << "调用了构造函数Person() " << endl;
 
     }
 
@@ -21,9 +21,7 @@ public:
     }
 
     Person(string name, int age) {
-        cout << "start" << endl;
         Person();
-        cout << "end" << endl;
         m_Name = name;
         m_Age = age;
 //        memset(m_Hobby, 0, sizeof(m_Hobby));
@@ -35,7 +33,7 @@ public:
     }
 
     ~Person() {
-        cout << "调用了析构函数" << endl;
+//        cout << "调用了析构函数" << endl;
     }
 
 private:
@@ -55,18 +53,9 @@ int main() {
 }
 /*
  *调用输出内容为：
-start
-调用了构造函数Person()
-调用了析构函数
-end
 姓名：kobe，年龄：22 兴趣：�
-调用了析构函数
 
- 可以从上面输出结果看出
-start
-调用了构造函数Person()
-调用了析构函数
-end
- 上面输出是25行 Person();  临时对象 创建和销毁时调用的
-
+如果粗心的人，这事就这么过了，留下巨大的bug，因为没有调用构造函数
+ 16行 24行的 Person(); 的真正含义不是调用构造函数，而是创建一个匿名对象，也叫临时对象
+ 临时对象的特点，没有名字，创建之后立马就销毁（;后面就开始销毁）
  */
