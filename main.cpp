@@ -3,70 +3,47 @@
 using namespace std;
 
 class Person {
+    friend int main();//友元全局函数
+
+    friend void test();//友元全局函数
+
+    friend class Student;//友元类
+
 public:
+    string m_name;
+
     Person() {
-        m_Name.clear();
-        m_Age = 0;
-        memset(m_Hobby, 0, sizeof(m_Hobby));
-        cout << "调用了构造函数Person() " << endl;
-
-    }
-
-    Person(string name) {
-        Person();
-        m_Name = name;
-//        m_Age = 0;
-//        memset(m_Hobby, 0, sizeof(m_Hobby));
-//        cout << "调用了构造函数Person(string name)" << endl;
-    }
-
-    Person(string name, int age) {
-        cout << "start" << endl;
-        Person();
-        cout << "end" << endl;
-        m_Name = name;
-        m_Age = age;
-//        memset(m_Hobby, 0, sizeof(m_Hobby));
-//        cout << "调用了构造函数Person(string name, int age)" << endl;
-    }
-
-    void show() {
-        cout << "姓名：" << m_Name << "，年龄：" << m_Age << " 兴趣：" << m_Hobby << endl;
-    }
-
-    ~Person() {
-        cout << "调用了析构函数" << endl;
+        m_name = "hello";
+        m_age = 100;
     }
 
 private:
-    string m_Name;
-    int m_Age;
-    char m_Hobby[30];
+    int m_age;
+
+    void showAge() {
+        cout << m_age << endl;
+    }
+};
+
+class Student {
+public:
+    void callPersonFunc(const Person &p) {
+        cout << p.m_age << endl;
+    }
 };
 
 void test() {
-    Person p("kobe", 22);
-    p.show();
+    Person p;
+    p.showAge();
 }
 
 int main() {
+    Person p;
+    p.showAge();
     test();
+
+    Student s;
+    s.callPersonFunc(p);
+
     return 0;
 }
-/*
- *调用输出内容为：
-start
-调用了构造函数Person()
-调用了析构函数
-end
-姓名：kobe，年龄：22 兴趣：�
-调用了析构函数
-
- 可以从上面输出结果看出
-start
-调用了构造函数Person()
-调用了析构函数
-end
- 上面输出是25行 Person();  临时对象 创建和销毁时调用的
-
- */
