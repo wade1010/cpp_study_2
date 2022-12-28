@@ -1,13 +1,11 @@
 #include <iostream>
 using namespace std;
 
-void test(int a)
+void test()
 {
-    {
-        int a = 2;
-    }
 }
 int main()
 {
+    test();
     return 0;
 }
